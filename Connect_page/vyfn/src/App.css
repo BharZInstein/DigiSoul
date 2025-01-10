@@ -1,0 +1,55 @@
+body {
+  background: #000000;
+  color: #44ff00;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+h1, h2 {
+  color: #44ff00;
+  text-transform: uppercase;
+  font-family: 'Arial Black', sans-serif;
+  text-shadow: 0 0 20px rgba(68, 255, 0, 0.5);
+}
+
+p {
+  color: #ffffff;
+}
+
+button {
+  background-color: #000000;
+  color: #44ff00;
+  padding: 10px 15px;
+  border: 2px solid #44ff00;
+  border-radius: 0;
+  cursor: pointer;
+  margin: 10px;
+  text-transform: uppercase;
+  font-family: 'Arial Black', sans-serif;
+  box-shadow: 0 0 20px rgba(68, 255, 0, 0.3);
+}
+
+button:hover {
+  background-color: #44ff00;
+  color: #000000;
+  box-shadow: 0 0 30px rgba(68, 255, 0, 0.5);
+}
+
+input {
+  background-color: #000000;
+  color: #44ff00;
+  border: 2px solid #44ff00;
+  padding: 10px;
+  margin: 10px;
+  font-family: Arial, sans-serif;
+}
+
+input::placeholder {
+  color: rgba(68, 255, 0, 0.5);
+}
+

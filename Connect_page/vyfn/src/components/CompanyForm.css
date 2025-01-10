@@ -1,0 +1,107 @@
+.hero-container {
+  padding: 4rem 2rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.benefit-card {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(68, 255, 0, 0.1);
+  transition: transform 0.2s ease;
+  border: 1px solid rgba(68, 255, 0, 0.3);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(68, 255, 0, 0.2);
+}
+
+.benefit-card h3 {
+  color: #44ff00;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-family: 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(68, 255, 0, 0.5);
+}
+
+.benefit-description {
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
+  font-size: 1rem;
+  text-shadow: 0 0 5px rgba(68, 255, 0, 0.3);
+}
+
+.hero-title {
+  font-size: 4rem;
+  margin: 2rem 0;
+  color: #44ff00;
+  font-family: 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(68, 255, 0, 0.5);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.connect-button {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  background: #000000;
+  color: #44ff00;
+  border: 2px solid #44ff00;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 2rem auto;
+  display: inline-block;
+  text-transform: uppercase;
+  font-family: 'Arial Black', sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(68, 255, 0, 0.3);
+}
+
+.connect-button:hover {
+  background: #44ff00;
+  color: #000000;
+  box-shadow: 0 0 30px rgba(68, 255, 0, 0.5);
+}
+
+.company-container {
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+.company-details-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(68, 255, 0, 0.3);
+  box-shadow: 0 0 20px rgba(68, 255, 0, 0.1);
+  color: #44ff00;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.company-details-box p {
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
