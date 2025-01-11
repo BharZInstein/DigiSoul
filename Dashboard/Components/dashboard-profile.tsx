@@ -1,60 +1,173 @@
-interface DashboardProfileProps {
-    name: string
-    walletId: string
-    solidPoints: number
-    multiplier: number
-    avatarUrl: string
-  }
-  
-  export function DashboardProfile({ 
-    name, 
-    walletId, 
-    solidPoints, 
-    multiplier,
-    avatarUrl 
-  }: DashboardProfileProps) {
-    return (
-      <div className="rounded-2xl bg-[#14151f] p-6">
-        <div className="flex items-start justify-between mb-6">
-          <div className="relative">
-            <img
-              src={avatarUrl}
-              alt="Profile"
-              className="w-24 h-24 rounded-full"
-            />
-          </div>
-          <button className="px-4 py-2 text-sm bg-[#1c1d29] rounded-lg hover:bg-[#2a2b3d] transition-colors">
-            Edit profile
+'use client';
+
+import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+interface SubCategory {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  connected?: boolean;
+}
+
+interface TabCategory {
+  id: string;
+  label: string;
+  subCategories?: SubCategory[];
+}
+
+const TABS: TabCategory[] = [
+  {
+    id: 'credit',
+    label: 'Credit',
+    subCategories: [
+      {
+        id: 'cibil',
+        name: 'CIBIL Score',
+        icon: '📊',
+        description: 'View your credit score and history',
+      },
+    ],
+  },
+  {
+    id: 'social',
+    label: 'Social',
+    subCategories: [
+      {
+        id: 'discord',
+        name: 'Discord',
+        icon: '🎮',
+        description: 'Connect your Discord account to identify your reputation.',
+        connected: true,
+      },
+      {
+        id: 'instagram',
+        name: 'Instagram',
+        icon: '📸',
+        description: 'Connect to Instagram to verify your social media presence.',
+        connected: false,
+      },
+      {
+        id: 'twitter',
+        name: 'Twitter',
+        icon: '𝕏',
+        description: 'Connect to Twitter to verify your social media presence.',
+        connected: false,
+      },
+    ],
+  },
+  {
+    id: 'gaming',
+    label: 'Gaming',
+    subCategories: [
+      {
+        id: 'sorare',
+        name: 'Sorare',
+        icon: '🎮',
+        description: 'Connect your Sorare gaming profile.',
+      },
+      {
+        id: 'atlas',
+        name: 'The Atlas',
+        icon: '🗺️',
+        description: 'Connect your Atlas gaming profile.',
+      },
+      {
+        id: 'decentraland',
+        name: 'Decentraland',
+        icon: '🌍',
+        description: 'Connect your Decentraland profile.',
+      },
+    ],
+  },
+  {
+    id: 'on-chain',
+    label: 'On-chain Activities',
+    subCategories: [
+      {
+        id: 'dune',
+        name: 'Dune',
+        icon: '📈',
+        description: 'View your Dune Analytics.',
+      },
+      {
+        id: 'nansen',
+        name: 'Nansen',
+        icon: '📊',
+        description: 'Connect your Nansen profile.',
+      },
+    ],
+  },
+];
+
+export default function DashboardTabs() {
+  const [activeTab, setActiveTab] = useState('social');
+  const [expandedTab, setExpandedTab] = useState<string>('social');
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+    setExpandedTab(tabId);
+  };
+
+  const activeTabData = TABS.find((tab) => tab.id === activeTab);
+
+  return (
+    <div className="rounded-2xl bg-[#060709] p-6">
+      <div className="flex gap-2 overflow-x-auto pb-4">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => handleTabClick(tab.id)}
+            className={`group flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 ${
+              activeTab === tab.id
+                ? 'bg-white/10 text-white'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            {tab.label}
+            {tab.subCategories && (
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-300 ${
+                  expandedTab === tab.id ? 'rotate-180' : ''
+                }`}
+              />
+            )}
           </button>
-        </div>
-        
-        <div className="space-y-4">
-          <div>
-            <h2 className="text-2xl font-bold">{name}</h2>
-            <p className="text-gray-400 flex items-center gap-2">
-              {walletId}
-              <button className="hover:text-gray-300">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-            </p>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className="text-yellow-500">★</span>
-              <span>SOLID Points</span>
-              <span className="font-bold">{solidPoints}</span>
-            </div>
-            <div className="flex items-center gap-2 text-blue-400">
-              <span>Multiplier</span>
-              <span className="font-bold">{multiplier}x</span>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-    )
-  }
-  
-  
+
+      {/* Single Subcategories Section */}
+      {activeTabData?.subCategories && (
+        <div className="mt-4 grid gap-4 md:grid-cols-2 animate-fadeIn">
+          {activeTabData.subCategories.map((subCat) => (
+            <div
+              key={subCat.id}
+              className="p-4 rounded-xl bg-[#1c1d29] flex items-center justify-between hover:bg-[#2a2b3d] transition-colors duration-300"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#14151f] flex items-center justify-center text-xl">
+                  {subCat.icon}
+                </div>
+                <div>
+                  <h4 className="font-medium">{subCat.name}</h4>
+                  <p className="text-sm text-gray-400">{subCat.description}</p>
+                </div>
+              </div>
+              <button
+                className={`px-4 py-2 rounded-lg text-sm ${
+                  subCat.connected
+                    ? 'bg-green-500/20 text-green-500'
+                    : 'bg-white/5 text-white hover:bg-white/10'
+                }`}
+              >
+                {subCat.connected ? 'Connected' : 'Connect'}
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
