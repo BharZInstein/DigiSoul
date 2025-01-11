@@ -1,5 +1,5 @@
 import { DashboardProfile } from '@/components/dashboard-profile'
-import { DashboardTabs } from '@/components/dashboard-tabs'
+import { DashboardTabs } from '@/components/dasboard-tabs'
 import { SolidScore } from '@/components/solid-score'
 import { ScoreCategories } from '@/components/score-categories'
 import { WalletValue } from '@/components/wallet-value'
